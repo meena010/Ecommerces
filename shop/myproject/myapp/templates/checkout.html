@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<h3>Checkout</h3>
+<div class="row">
+<div class="col-md-6">
+    <div class="card" style=" padding: 30px; margin: 15px;">
+        <a class="btn btn-danger" href="{% url 'cart' %}">
+            Back To Cart
+        </a>
+        <h3>Cart Summary</h3>
+        <div class="card" style=" padding: 30px; margin: 15px;">
+            <div class="row" style="display:flex;">
+             <div style="flex:2">Image</div>
+             <div style="flex:2"><b>Item</b></div>
+             <div style="flex:1"><b>price</b></div>
+             <div style="flex:1"><b>quantity</b></div>
+             <div style="flex:1"><b>total</b></div>
+            </div>
+             
+            {% for item in items %}
+        
+            <div class="row" style="display:flex;">
+              <div style="flex:2"><img src="{{item.coffee.image}}" height="100px" width="100px"></div>
+              <div style="flex:2">{{item.coffee.name}}</div>
+              <div style="flex:1">{{item.coffee.price}}</div>
+              <div style="flex:1">{{item.quantity}}</div>
+              <div style="flex:1">{{item.get_total}}</div>
+             </div>
+           
+             {% endfor %}
+             
+              <hr>
+              <div class="row"><b>Items:</b> {{order.get_cart_items}}</div>
+              <hr>
+              <div class="row"><b>Cart Total:</b> {{order.get_cart_total}}</div>
+     
+               </div>
+    </div>
+</div>
+<div class="col-md-6">
+  <div class="card" style=" padding: 30px; margin: 15px;">
+      <form>
+          <div>
+              <div class="row g-3">
+                  <div class="col">
+                    <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                  </div>
+                  <div class="col">
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email">
+                  </div>
+                </div>
+                <hr>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-danger">Paytm Pay</button>
+                </div>
+                <br>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-danger"> Google Pay</button>
+                </div>
+                <br>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-danger">credit Pay</button>
+                </div>
+          </div>
+      </form>
+  </div>
+  </div>
+</div>
+
+{% endblock %}
